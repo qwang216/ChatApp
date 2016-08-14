@@ -41,6 +41,8 @@ class LoginControllerController: UIViewController {
         let tf = UITextField()
         tf.placeholder = "Email"
         tf.keyboardType = .EmailAddress
+        tf.autocapitalizationType = .None
+        tf.autocorrectionType = .No
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
@@ -82,6 +84,16 @@ class LoginControllerController: UIViewController {
         return sc
     }()
 
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.layer.cornerRadius = 15
+        indicator.layer.masksToBounds = true
+        indicator.hidesWhenStopped = true
+        indicator.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        return indicator
+    }()
+
     var inputContainerHeightAnchor: NSLayoutConstraint?
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
     var emailTextFieldHeighAnchor: NSLayoutConstraint?
@@ -94,11 +106,21 @@ class LoginControllerController: UIViewController {
         view.addSubview(loginRegisterButton)
         view.addSubview(profileImageView)
         view.addSubview(loginRegisterSegmentedControl)
+        view.addSubview(activityIndicator)
 
         setupInputContainerView()
         setupLoginRegisterButton()
         setupProfileImageView()
         setupLoginRegisterSegmentedControl()
+        setupActivityIndicator()
+    }
+
+    func setupActivityIndicator() {
+        //need x, y, width, height constraings
+        activityIndicator.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        activityIndicator.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+        activityIndicator.heightAnchor.constraintEqualToConstant(75).active = true
+        activityIndicator.widthAnchor.constraintEqualToConstant(75).active = true
     }
 
     func setupInputContainerView() {
@@ -174,13 +196,24 @@ class LoginControllerController: UIViewController {
         loginRegisterSegmentedControl.heightAnchor.constraintEqualToConstant(30).active = true
     }
     func handleRegister() {
-        guard let email = emailTextField.text where email != "", let password = passwordTextField.text where password != "", let name = nameTextField.text where name != "" else {
+        guard let email = emailTextField.text where email != "", let password = passwordTextField.text where password != "", let name = nameTextField.text else {
             return presentViewController(errorAlertTitle("Invalid Field", message: "Please enter valid Email/Password"), animated: true, completion: nil)
         }
+        activityIndicator.startAnimating()
+        loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? loginWith(email, password: password) : registerUserWith(name, email: email, password: password)
+    }
 
+    private func loginWith(email: String, password: String) {
+        activityIndicator.stopAnimating()
+    }
+
+    private func registerUserWith(name: String, email: String, password: String) {
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
+            self.activityIndicator.stopAnimating()
             if error != nil {
-                print("login email error === \(error)")
+                if let registerError = error?.localizedDescription {
+                self.presentViewController(errorAlertTitle("Register Error", message: registerError), animated: true, completion: nil)
+                }
                 return
             }
             guard let uid = user?.uid else { return }
@@ -198,7 +231,7 @@ class LoginControllerController: UIViewController {
                 self.passwordTextField.resignFirstResponder()
                 self.dismissViewControllerAnimated(true, completion: nil)
             })
-
+            
         })
     }
 
