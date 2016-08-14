@@ -73,13 +73,19 @@ class LoginControllerController: UIViewController {
         return imageView
     }()
 
-    let loginRegisterSegmentedControl: UISegmentedControl = {
+    lazy var loginRegisterSegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Login", "Register"])
         sc.translatesAutoresizingMaskIntoConstraints = false
         sc.tintColor = UIColor.whiteColor()
         sc.selectedSegmentIndex = 0
+        sc.addTarget(self, action: #selector(handleLoginRegisterSegmentedControler), forControlEvents: .ValueChanged)
         return sc
     }()
+
+    var inputContainerHeightAnchor: NSLayoutConstraint?
+    var nameTextFieldHeightAnchor: NSLayoutConstraint?
+    var emailTextFieldHeighAnchor: NSLayoutConstraint?
+    var passwordTextFieldHeighAnchor: NSLayoutConstraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +106,8 @@ class LoginControllerController: UIViewController {
         inputContainerView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         inputContainerView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
         inputContainerView.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -24).active = true
-        inputContainerView.heightAnchor.constraintEqualToConstant(150).active = true
+        inputContainerHeightAnchor = inputContainerView.heightAnchor.constraintEqualToConstant(150)
+        inputContainerHeightAnchor!.active = true
 
         inputContainerView.addSubview(nameTextField)
         inputContainerView.addSubview(nameSeparatorView)
@@ -112,7 +119,8 @@ class LoginControllerController: UIViewController {
         nameTextField.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor, constant: 12).active = true
         nameTextField.topAnchor.constraintEqualToAnchor(inputContainerView.topAnchor).active = true
         nameTextField.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
-        nameTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3).active = true
+        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3)
+        nameTextFieldHeightAnchor?.active = true
 
         //need x, y, width, height constraings
         nameSeparatorView.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor).active = true
@@ -124,7 +132,8 @@ class LoginControllerController: UIViewController {
         emailTextField.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor, constant: 12).active = true
         emailTextField.topAnchor.constraintEqualToAnchor(nameSeparatorView.bottomAnchor).active = true
         emailTextField.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
-        emailTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3).active = true
+        emailTextFieldHeighAnchor = emailTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3)
+        emailTextFieldHeighAnchor?.active = true
 
         //need x, y, width, height constraings
         emailSeparatorView.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor).active = true
@@ -136,7 +145,9 @@ class LoginControllerController: UIViewController {
         passwordTextField.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor, constant: 12).active = true
         passwordTextField.topAnchor.constraintEqualToAnchor(emailSeparatorView.bottomAnchor).active = true
         passwordTextField.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
-        passwordTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3).active = true
+        passwordTextFieldHeighAnchor = passwordTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3)
+        passwordTextFieldHeighAnchor?.active = true
+
     }
 
     func setupLoginRegisterButton() {
@@ -190,6 +201,29 @@ class LoginControllerController: UIViewController {
 
         })
     }
+
+    func handleLoginRegisterSegmentedControler() {
+        let title = loginRegisterSegmentedControl.titleForSegmentAtIndex(loginRegisterSegmentedControl.selectedSegmentIndex)
+        loginRegisterButton.setTitle(title, forState: .Normal)
+
+        // change height of inputContainerView ???
+        inputContainerHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
+
+        // change height of nameTextField
+        nameTextFieldHeightAnchor?.active = false
+        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
+        nameTextFieldHeightAnchor?.active = true
+
+        emailTextFieldHeighAnchor?.active = false
+        emailTextFieldHeighAnchor = emailTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        emailTextFieldHeighAnchor?.active = true
+
+        passwordTextFieldHeighAnchor?.active = false
+        passwordTextFieldHeighAnchor = passwordTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        passwordTextFieldHeighAnchor?.active = true
+    }
+
+
     private func errorAlertWithMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let ok = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
@@ -207,9 +241,3 @@ extension UIColor {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
 }
-
-
-
-
-
-
