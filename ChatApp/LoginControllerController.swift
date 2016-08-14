@@ -35,13 +35,34 @@ class LoginControllerController: UIViewController {
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
+    let emailTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Email"
+        tf.keyboardType = .EmailAddress
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        return tf
+    }()
 
+    let passwordTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Password"
+        tf.secureTextEntry = true
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        return tf
+    }()
     let nameSeparatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    let emailSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +82,9 @@ class LoginControllerController: UIViewController {
 
         inputContainerView.addSubview(nameTextField)
         inputContainerView.addSubview(nameSeparatorView)
+        inputContainerView.addSubview(emailTextField)
+        inputContainerView.addSubview(emailSeparatorView)
+        inputContainerView.addSubview(passwordTextField)
 
         //need x, y, width, height constraings
         nameTextField.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor, constant: 12).active = true
@@ -68,9 +92,29 @@ class LoginControllerController: UIViewController {
         nameTextField.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
         nameTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3).active = true
 
+        //need x, y, width, height constraings
+        nameSeparatorView.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor).active = true
         nameSeparatorView.topAnchor.constraintEqualToAnchor(nameTextField.bottomAnchor).active = true
         nameSeparatorView.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
         nameSeparatorView.heightAnchor.constraintEqualToConstant(1).active = true
+
+        //need x, y, width, height constraings
+        emailTextField.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor, constant: 12).active = true
+        emailTextField.topAnchor.constraintEqualToAnchor(nameSeparatorView.bottomAnchor).active = true
+        emailTextField.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
+        emailTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3).active = true
+
+        //need x, y, width, height constraings
+        emailSeparatorView.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor).active = true
+        emailSeparatorView.topAnchor.constraintEqualToAnchor(emailTextField.bottomAnchor).active = true
+        emailSeparatorView.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
+        emailSeparatorView.heightAnchor.constraintEqualToConstant(1).active = true
+
+        //need x, y, width, height constraings
+        passwordTextField.leftAnchor.constraintEqualToAnchor(inputContainerView.leftAnchor, constant: 12).active = true
+        passwordTextField.topAnchor.constraintEqualToAnchor(emailSeparatorView.bottomAnchor).active = true
+        passwordTextField.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
+        passwordTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3).active = true
 
     }
 
@@ -92,3 +136,9 @@ extension UIColor {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
     }
 }
+
+
+
+
+
+
