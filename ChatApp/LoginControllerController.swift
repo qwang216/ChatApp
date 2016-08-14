@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginControllerController: UIViewController {
 
@@ -19,13 +20,14 @@ class LoginControllerController: UIViewController {
         return view
     }()
 
-    let loginRegisterButton: UIButton = {
+    lazy var loginRegisterButton: UIButton = {
         let button = UIButton(type: .System)
         button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         button.setTitle("Register", forState: .Normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.titleLabel?.font = UIFont.boldSystemFontOfSize(16)
+        button.addTarget(self, action: #selector(handleRegister), forControlEvents: .TouchUpInside)
         return button
     }()
 
@@ -142,6 +144,34 @@ class LoginControllerController: UIViewController {
         profileImageView.bottomAnchor.constraintEqualToAnchor(inputContainerView.topAnchor, constant: -12).active = true
         profileImageView.widthAnchor.constraintEqualToConstant(150).active = true
         profileImageView.heightAnchor.constraintEqualToConstant(150).active = true
+    }
+
+    func handleRegister() {
+        guard let email = emailTextField.text where email != "", let password = passwordTextField.text where password != "", let name = nameTextField.text where name != "" else {
+            print("invalid email/pw")
+            return
+        }
+
+        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
+            if error != nil {
+                print("login email error === \(error)")
+                return
+            }
+            guard let uid = user?.uid else { return }
+
+            let ref = FIRDatabase.database().referenceFromURL("https://chatapp-ef905.firebaseio.com/")
+            let userReference = ref.child("users").child(uid)
+            let values = ["name": name, "email": email]
+            userReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                if err != nil {
+                    print("save login erro = \(err)")
+                    return
+                }
+
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
+
+        })
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
