@@ -175,7 +175,7 @@ class LoginControllerController: UIViewController {
     }
     func handleRegister() {
         guard let email = emailTextField.text where email != "", let password = passwordTextField.text where password != "", let name = nameTextField.text where name != "" else {
-            return errorAlertWithMessage("Invalid Field", message: "Please enter valid Email/Password")
+            return presentViewController(errorAlertTitle("Invalid Field", message: "Please enter valid Email/Password"), animated: true, completion: nil)
         }
 
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
@@ -223,13 +223,6 @@ class LoginControllerController: UIViewController {
         passwordTextFieldHeighAnchor?.active = true
     }
 
-
-    private func errorAlertWithMessage(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let ok = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
-        alert.addAction(ok)
-        presentViewController(alert, animated: true, completion: nil)
-    }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
