@@ -14,12 +14,13 @@ class MessagesController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: #selector(handleLogout))
-
+        validateUserLogin()
+    }
+    func validateUserLogin() {
         if FIRAuth.auth()?.currentUser?.uid == nil {
-            handleLogout()
+            performSelector(#selector(handleLogout), withObject: nil, afterDelay: 0)
         }
     }
-
     func handleLogout() {
         do {
             try FIRAuth.auth()?.signOut()
