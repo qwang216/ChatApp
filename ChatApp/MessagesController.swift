@@ -18,7 +18,9 @@ class MessagesController: UITableViewController {
         validateUserLogin()
     }
     func handleNewMessage() {
-        
+        let newMessageController = NewMessageController()
+        let navController = UINavigationController(rootViewController: newMessageController)
+        presentViewController(navController, animated: true, completion: nil)
     }
     func validateUserLogin() {
         if FIRAuth.auth()?.currentUser?.uid == nil {

@@ -12,5 +12,10 @@ class NewMessageController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(handleCancel))
+    }
+
+    func handleCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
