@@ -27,7 +27,7 @@ class LoginControllerController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.titleLabel?.font = UIFont.boldSystemFontOfSize(16)
-        button.addTarget(self, action: #selector(handleRegister), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(handleRegisterLogin), forControlEvents: .TouchUpInside)
         return button
     }()
 
@@ -79,7 +79,7 @@ class LoginControllerController: UIViewController {
         let sc = UISegmentedControl(items: ["Login", "Register"])
         sc.translatesAutoresizingMaskIntoConstraints = false
         sc.tintColor = UIColor.whiteColor()
-        sc.selectedSegmentIndex = 0
+        sc.selectedSegmentIndex = 1
         sc.addTarget(self, action: #selector(handleLoginRegisterSegmentedControler), forControlEvents: .ValueChanged)
         return sc
     }()
@@ -195,24 +195,42 @@ class LoginControllerController: UIViewController {
         loginRegisterSegmentedControl.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
         loginRegisterSegmentedControl.heightAnchor.constraintEqualToConstant(30).active = true
     }
+
+    func handleRegisterLogin() {
+        activityIndicator.startAnimating()
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+            handleLogin()
+        } else {
+            handleRegister()
+        }
+        emailTextField.resignFirstResponder()
+        nameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+
+    func handleLogin() {
+        guard let email = emailTextField.text where email != "", let password = passwordTextField.text where password != "" else {
+            return presentViewController(errorAlertTitle("Invalid Field", message: "Please enter valid Email/Password"), animated: true, completion: nil)
+        }
+        FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user, error) in
+            self.activityIndicator.stopAnimating()
+            if error != nil {
+                self.presentViewController(errorAlertTitle("Login Failed", message: (error?.localizedDescription)!), animated: true, completion: nil)
+                return
+            }
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
+
     func handleRegister() {
         guard let email = emailTextField.text where email != "", let password = passwordTextField.text where password != "", let name = nameTextField.text else {
             return presentViewController(errorAlertTitle("Invalid Field", message: "Please enter valid Email/Password"), animated: true, completion: nil)
         }
-        activityIndicator.startAnimating()
-        loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? loginWith(email, password: password) : registerUserWith(name, email: email, password: password)
-    }
-
-    private func loginWith(email: String, password: String) {
-        activityIndicator.stopAnimating()
-    }
-
-    private func registerUserWith(name: String, email: String, password: String) {
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
             self.activityIndicator.stopAnimating()
             if error != nil {
                 if let registerError = error?.localizedDescription {
-                self.presentViewController(errorAlertTitle("Register Error", message: registerError), animated: true, completion: nil)
+                    self.presentViewController(errorAlertTitle("Register Error", message: registerError), animated: true, completion: nil)
                 }
                 return
             }
@@ -226,13 +244,11 @@ class LoginControllerController: UIViewController {
                     print("save login erro = \(err)")
                     return
                 }
-                self.emailTextField.resignFirstResponder()
-                self.nameTextField.resignFirstResponder()
-                self.passwordTextField.resignFirstResponder()
                 self.dismissViewControllerAnimated(true, completion: nil)
             })
-            
+
         })
+
     }
 
     func handleLoginRegisterSegmentedControler() {
