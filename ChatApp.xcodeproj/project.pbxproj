@@ -16,6 +16,7 @@
 		D473ECD01D601C86001A49FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D473ECCF1D601C86001A49FE /* GoogleService-Info.plist */; };
 		D4E06EFE1D603206008F7550 /* GlobalMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06EFD1D603206008F7550 /* GlobalMethods.swift */; };
 		D4E06F001D604A8E008F7550 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */; };
+		D4E06F021D6122AC008F7550 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06F011D6122AC008F7550 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		D473ECCF1D601C86001A49FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D4E06EFD1D603206008F7550 /* GlobalMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalMethods.swift; sourceTree = "<group>"; };
 		D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		D4E06F011D6122AC008F7550 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		D408F6701D60069A0081E558 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				D4E06F031D612333008F7550 /* Model */,
 				D408F6851D6008780081E558 /* Controller */,
 				D408F6711D60069A0081E558 /* AppDelegate.swift */,
 				D4E06EFD1D603206008F7550 /* GlobalMethods.swift */,
@@ -95,6 +98,14 @@
 				D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		D4E06F031D612333008F7550 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D4E06F011D6122AC008F7550 /* User.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		E35B408B3C423AE97FE46AFC /* Frameworks */ = {
@@ -229,6 +240,7 @@
 			files = (
 				D408F6841D60086F0081E558 /* LoginControllerController.swift in Sources */,
 				D4E06F001D604A8E008F7550 /* NewMessageController.swift in Sources */,
+				D4E06F021D6122AC008F7550 /* User.swift in Sources */,
 				D408F6741D60069A0081E558 /* MessagesController.swift in Sources */,
 				D408F6721D60069A0081E558 /* AppDelegate.swift in Sources */,
 				D4E06EFE1D603206008F7550 /* GlobalMethods.swift in Sources */,
