@@ -14,6 +14,7 @@
 		D408F67C1D60069A0081E558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D408F67A1D60069A0081E558 /* LaunchScreen.storyboard */; };
 		D408F6841D60086F0081E558 /* LoginControllerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408F6831D60086F0081E558 /* LoginControllerController.swift */; };
 		D473ECD01D601C86001A49FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D473ECCF1D601C86001A49FE /* GoogleService-Info.plist */; };
+		D4E06EFE1D603206008F7550 /* GlobalMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06EFD1D603206008F7550 /* GlobalMethods.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D408F67D1D60069A0081E558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D408F6831D60086F0081E558 /* LoginControllerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerController.swift; sourceTree = "<group>"; };
 		D473ECCF1D601C86001A49FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D4E06EFD1D603206008F7550 /* GlobalMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalMethods.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				D408F6851D6008780081E558 /* Controller */,
 				D408F6711D60069A0081E558 /* AppDelegate.swift */,
+				D4E06EFD1D603206008F7550 /* GlobalMethods.swift */,
 				D408F6781D60069A0081E558 /* Assets.xcassets */,
 				D408F67A1D60069A0081E558 /* LaunchScreen.storyboard */,
 				D408F67D1D60069A0081E558 /* Info.plist */,
@@ -224,6 +227,7 @@
 				D408F6841D60086F0081E558 /* LoginControllerController.swift in Sources */,
 				D408F6741D60069A0081E558 /* ViewController.swift in Sources */,
 				D408F6721D60069A0081E558 /* AppDelegate.swift in Sources */,
+				D4E06EFE1D603206008F7550 /* GlobalMethods.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
