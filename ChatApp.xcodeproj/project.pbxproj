@@ -15,6 +15,7 @@
 		D408F6841D60086F0081E558 /* LoginControllerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408F6831D60086F0081E558 /* LoginControllerController.swift */; };
 		D473ECD01D601C86001A49FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D473ECCF1D601C86001A49FE /* GoogleService-Info.plist */; };
 		D4E06EFE1D603206008F7550 /* GlobalMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06EFD1D603206008F7550 /* GlobalMethods.swift */; };
+		D4E06F001D604A8E008F7550 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D408F6831D60086F0081E558 /* LoginControllerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerController.swift; sourceTree = "<group>"; };
 		D473ECCF1D601C86001A49FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D4E06EFD1D603206008F7550 /* GlobalMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalMethods.swift; sourceTree = "<group>"; };
+		D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			children = (
 				D408F6831D60086F0081E558 /* LoginControllerController.swift */,
 				D408F6731D60069A0081E558 /* MessagesController.swift */,
+				D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D408F6841D60086F0081E558 /* LoginControllerController.swift in Sources */,
+				D4E06F001D604A8E008F7550 /* NewMessageController.swift in Sources */,
 				D408F6741D60069A0081E558 /* MessagesController.swift in Sources */,
 				D408F6721D60069A0081E558 /* AppDelegate.swift in Sources */,
 				D4E06EFE1D603206008F7550 /* GlobalMethods.swift in Sources */,

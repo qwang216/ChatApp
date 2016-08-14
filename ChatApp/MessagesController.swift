@@ -14,7 +14,11 @@ class MessagesController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: #selector(handleLogout))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "new_message_icon"), style: .Plain, target: self, action: #selector(handleNewMessage))
         validateUserLogin()
+    }
+    func handleNewMessage() {
+        
     }
     func validateUserLogin() {
         if FIRAuth.auth()?.currentUser?.uid == nil {
