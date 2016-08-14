@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		C0202CA5F442CFD5B095198A /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C34C51E507B5BBE2F72C7F1 /* Pods_ChatApp.framework */; };
 		D408F6721D60069A0081E558 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408F6711D60069A0081E558 /* AppDelegate.swift */; };
-		D408F6741D60069A0081E558 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408F6731D60069A0081E558 /* ViewController.swift */; };
+		D408F6741D60069A0081E558 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408F6731D60069A0081E558 /* MessagesController.swift */; };
 		D408F6791D60069A0081E558 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D408F6781D60069A0081E558 /* Assets.xcassets */; };
 		D408F67C1D60069A0081E558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D408F67A1D60069A0081E558 /* LaunchScreen.storyboard */; };
 		D408F6841D60086F0081E558 /* LoginControllerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408F6831D60086F0081E558 /* LoginControllerController.swift */; };
@@ -23,7 +23,7 @@
 		7AB8DA50CC8386898A94763A /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		D408F66E1D60069A0081E558 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D408F6711D60069A0081E558 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D408F6731D60069A0081E558 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D408F6731D60069A0081E558 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		D408F6781D60069A0081E558 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D408F67B1D60069A0081E558 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D408F67D1D60069A0081E558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				D408F6831D60086F0081E558 /* LoginControllerController.swift */,
-				D408F6731D60069A0081E558 /* ViewController.swift */,
+				D408F6731D60069A0081E558 /* MessagesController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D408F6841D60086F0081E558 /* LoginControllerController.swift in Sources */,
-				D408F6741D60069A0081E558 /* ViewController.swift in Sources */,
+				D408F6741D60069A0081E558 /* MessagesController.swift in Sources */,
 				D408F6721D60069A0081E558 /* AppDelegate.swift in Sources */,
 				D4E06EFE1D603206008F7550 /* GlobalMethods.swift in Sources */,
 			);
