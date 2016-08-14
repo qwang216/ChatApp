@@ -63,14 +63,24 @@ class LoginControllerController: UIViewController {
         return view
     }()
 
+    let profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "gameofthrones_splash")
+        imageView.contentMode = .ScaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         view.addSubview(inputContainerView)
         view.addSubview(loginRegisterButton)
+        view.addSubview(profileImageView)
+
         setupInputContainerView()
         setupLoginRegisterButton()
+        setupProfileImageView()
     }
 
     func setupInputContainerView() {
@@ -125,6 +135,15 @@ class LoginControllerController: UIViewController {
         loginRegisterButton.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
         loginRegisterButton.heightAnchor.constraintEqualToConstant(50).active = true
     }
+
+    func setupProfileImageView() {
+        //need x, y, width, height constraings
+        profileImageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        profileImageView.bottomAnchor.constraintEqualToAnchor(inputContainerView.topAnchor, constant: -12).active = true
+        profileImageView.widthAnchor.constraintEqualToConstant(150).active = true
+        profileImageView.heightAnchor.constraintEqualToConstant(150).active = true
+    }
+
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
