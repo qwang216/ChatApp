@@ -73,16 +73,26 @@ class LoginControllerController: UIViewController {
         return imageView
     }()
 
+    let loginRegisterSegmentedControl: UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Login", "Register"])
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.tintColor = UIColor.whiteColor()
+        sc.selectedSegmentIndex = 0
+        return sc
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         view.addSubview(inputContainerView)
         view.addSubview(loginRegisterButton)
         view.addSubview(profileImageView)
+        view.addSubview(loginRegisterSegmentedControl)
 
         setupInputContainerView()
         setupLoginRegisterButton()
         setupProfileImageView()
+        setupLoginRegisterSegmentedControl()
     }
 
     func setupInputContainerView() {
@@ -127,7 +137,6 @@ class LoginControllerController: UIViewController {
         passwordTextField.topAnchor.constraintEqualToAnchor(emailSeparatorView.bottomAnchor).active = true
         passwordTextField.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
         passwordTextField.heightAnchor.constraintEqualToAnchor(inputContainerView.heightAnchor, multiplier: 1/3).active = true
-
     }
 
     func setupLoginRegisterButton() {
@@ -141,15 +150,21 @@ class LoginControllerController: UIViewController {
     func setupProfileImageView() {
         //need x, y, width, height constraings
         profileImageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        profileImageView.bottomAnchor.constraintEqualToAnchor(inputContainerView.topAnchor, constant: -12).active = true
+        profileImageView.bottomAnchor.constraintEqualToAnchor(loginRegisterSegmentedControl.topAnchor, constant: -12).active = true
         profileImageView.widthAnchor.constraintEqualToConstant(150).active = true
         profileImageView.heightAnchor.constraintEqualToConstant(150).active = true
     }
 
+    func setupLoginRegisterSegmentedControl() {
+        //need x, y, width, height constraings
+        loginRegisterSegmentedControl.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        loginRegisterSegmentedControl.bottomAnchor.constraintEqualToAnchor(inputContainerView.topAnchor, constant: -12).active = true
+        loginRegisterSegmentedControl.widthAnchor.constraintEqualToAnchor(inputContainerView.widthAnchor).active = true
+        loginRegisterSegmentedControl.heightAnchor.constraintEqualToConstant(30).active = true
+    }
     func handleRegister() {
         guard let email = emailTextField.text where email != "", let password = passwordTextField.text where password != "", let name = nameTextField.text where name != "" else {
-            print("invalid email/pw")
-            return
+            return errorAlertWithMessage("Invalid Field", message: "Please enter valid Email/Password")
         }
 
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
@@ -167,13 +182,20 @@ class LoginControllerController: UIViewController {
                     print("save login erro = \(err)")
                     return
                 }
-
+                self.emailTextField.resignFirstResponder()
+                self.nameTextField.resignFirstResponder()
+                self.passwordTextField.resignFirstResponder()
                 self.dismissViewControllerAnimated(true, completion: nil)
             })
 
         })
     }
-
+    private func errorAlertWithMessage(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let ok = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        alert.addAction(ok)
+        presentViewController(alert, animated: true, completion: nil)
+    }
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
