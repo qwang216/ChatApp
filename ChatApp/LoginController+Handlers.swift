@@ -44,6 +44,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
 
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
             if error != nil {
+                self.activityIndicator.stopAnimating()
                 if let registerError = error?.localizedDescription {
                     self.presentViewController(errorAlertTitle("Register Error", message: registerError), animated: true, completion: nil)
                 }
@@ -52,9 +53,9 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             guard let uid = user?.uid else { return }
 
             let imageName = NSUUID().UUIDString
-            let storageRef = FIRStorage.storage().reference().child(imageName)
-            if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
-                storageRef.putData(uploadData, metadata: nil, completion: { (metaData, error) in
+            let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName).jpg")
+            if let compressedImage = UIImageJPEGRepresentation(self.profileImageView.image!, 0.15) {
+                storageRef.putData(compressedImage, metadata: nil, completion: { (metaData, error) in
                     if error != nil {
                         print(error)
                         return
@@ -66,8 +67,6 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                     }
                 })
             }
-
-
         })
     }
 
