@@ -54,7 +54,8 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
 
             let imageName = NSUUID().UUIDString
             let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName).jpg")
-            if let compressedImage = UIImageJPEGRepresentation(self.profileImageView.image!, 0.15) {
+
+            if let profileImage = self.profileImageView.image, compressedImage = UIImageJPEGRepresentation(profileImage, 0.15) {
                 storageRef.putData(compressedImage, metadata: nil, completion: { (metaData, error) in
                     if error != nil {
                         print(error)
@@ -66,6 +67,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                         self.registerUserIntoDatabseWithUID(uid, values: values)
                     }
                 })
+
             }
         })
     }
