@@ -48,6 +48,7 @@ class MessagesController: UITableViewController {
             presentViewController(errorAlertTitle("Authntication Error", message: "Logout Error \(error.localizedFailureReason)"), animated: true, completion: nil)
         }
         let loginController = LoginController()
+        loginController.messagesController = self
         presentViewController(loginController, animated: true, completion: nil)
     }
 }

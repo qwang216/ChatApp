@@ -33,6 +33,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 self.presentViewController(errorAlertTitle("Login Failed", message: (error?.localizedDescription)!), animated: true, completion: nil)
                 return
             }
+            self.messagesController?.fetchUserAndSetupNavBarTitle()
             self.dismissViewControllerAnimated(true, completion: nil)
         })
     }
@@ -81,6 +82,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 print("save login erro = \(err)")
                 return
             }
+            self.messagesController?.navigationItem.title = values["name"] as? String
             self.dismissViewControllerAnimated(true, completion: nil)
         })
     }
