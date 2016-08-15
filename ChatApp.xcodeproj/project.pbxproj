@@ -18,6 +18,7 @@
 		D4E06F001D604A8E008F7550 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */; };
 		D4E06F021D6122AC008F7550 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06F011D6122AC008F7550 /* User.swift */; };
 		D4E06F051D612844008F7550 /* LoginController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06F041D612844008F7550 /* LoginController+Handlers.swift */; };
+		D4E06F081D617999008F7550 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06F071D617999008F7550 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		D4E06F011D6122AC008F7550 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D4E06F041D612844008F7550 /* LoginController+Handlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginController+Handlers.swift"; sourceTree = "<group>"; };
+		D4E06F071D617999008F7550 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		D408F6701D60069A0081E558 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				D4E06F061D61798C008F7550 /* Helpers */,
 				D4E06F031D612333008F7550 /* Model */,
 				D408F6851D6008780081E558 /* Controller */,
 				D408F6711D60069A0081E558 /* AppDelegate.swift */,
@@ -109,6 +112,14 @@
 				D4E06F011D6122AC008F7550 /* User.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		D4E06F061D61798C008F7550 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D4E06F071D617999008F7550 /* Extensions.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		E35B408B3C423AE97FE46AFC /* Frameworks */ = {
@@ -244,6 +255,7 @@
 				D408F6841D60086F0081E558 /* LoginController.swift in Sources */,
 				D4E06F051D612844008F7550 /* LoginController+Handlers.swift in Sources */,
 				D4E06F001D604A8E008F7550 /* NewMessageController.swift in Sources */,
+				D4E06F081D617999008F7550 /* Extensions.swift in Sources */,
 				D4E06F021D6122AC008F7550 /* User.swift in Sources */,
 				D408F6741D60069A0081E558 /* MessagesController.swift in Sources */,
 				D408F6721D60069A0081E558 /* AppDelegate.swift in Sources */,
