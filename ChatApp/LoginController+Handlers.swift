@@ -41,8 +41,8 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
         guard let email = emailTextField.text where email != "", let password = passwordTextField.text where password != "", let name = nameTextField.text else {
             return presentViewController(errorAlertTitle("Invalid Field", message: "Please enter valid Email/Password"), animated: true, completion: nil)
         }
+
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
-            self.activityIndicator.stopAnimating()
             if error != nil {
                 if let registerError = error?.localizedDescription {
                     self.presentViewController(errorAlertTitle("Register Error", message: registerError), animated: true, completion: nil)
@@ -51,19 +51,40 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             }
             guard let uid = user?.uid else { return }
 
-            let ref = FIRDatabase.database().referenceFromURL("https://chatapp-ef905.firebaseio.com/")
-            let userReference = ref.child("users").child(uid)
-            let values = ["name": name, "email": email]
-            userReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                if err != nil {
-                    print("save login erro = \(err)")
-                    return
-                }
-                self.dismissViewControllerAnimated(true, completion: nil)
-            })  
+            let imageName = NSUUID().UUIDString
+            let storageRef = FIRStorage.storage().reference().child(imageName)
+            if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
+                storageRef.putData(uploadData, metadata: nil, completion: { (metaData, error) in
+                    if error != nil {
+                        print(error)
+                        return
+                    }
+                    print(metaData)
+                    if let profileImageUrl = metaData?.downloadURL()?.absoluteString {
+                        let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
+                        self.registerUserIntoDatabseWithUID(uid, values: values)
+                    }
+                })
+            }
+
+
         })
     }
-    
+
+    private func registerUserIntoDatabseWithUID(uid: String, values: [String: AnyObject]) {
+        let ref = FIRDatabase.database().referenceFromURL("https://chatapp-ef905.firebaseio.com/")
+        let userReference = ref.child("users").child(uid)
+        userReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+            self.activityIndicator.stopAnimating()
+            if err != nil {
+                print("save login erro = \(err)")
+                return
+            }
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
+
+
     func handleLoginRegisterSegmentedControler() {
         let title = loginRegisterSegmentedControl.titleForSegmentAtIndex(loginRegisterSegmentedControl.selectedSegmentIndex)
         loginRegisterButton.setTitle(title, forState: .Normal)
@@ -97,8 +118,14 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
     }
 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-            print(originalImage.size)
+        var selectedImageFromPicker: UIImage?
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            selectedImageFromPicker = editedImage
+        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            selectedImageFromPicker = originalImage
+        }
+        if let selectedImage = selectedImageFromPicker {
+            profileImageView.image = selectedImage
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
