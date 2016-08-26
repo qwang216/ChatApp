@@ -13,6 +13,7 @@
 		D408F6791D60069A0081E558 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D408F6781D60069A0081E558 /* Assets.xcassets */; };
 		D408F67C1D60069A0081E558 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D408F67A1D60069A0081E558 /* LaunchScreen.storyboard */; };
 		D408F6841D60086F0081E558 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408F6831D60086F0081E558 /* LoginController.swift */; };
+		D42586BA1D6FFF4800BD655F /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42586B91D6FFF4800BD655F /* ChatLogController.swift */; };
 		D473ECD01D601C86001A49FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D473ECCF1D601C86001A49FE /* GoogleService-Info.plist */; };
 		D4E06EFE1D603206008F7550 /* GlobalMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06EFD1D603206008F7550 /* GlobalMethods.swift */; };
 		D4E06F001D604A8E008F7550 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */; };
@@ -32,6 +33,7 @@
 		D408F67B1D60069A0081E558 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D408F67D1D60069A0081E558 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D408F6831D60086F0081E558 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		D42586B91D6FFF4800BD655F /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		D473ECCF1D601C86001A49FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D4E06EFD1D603206008F7550 /* GlobalMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalMethods.swift; sourceTree = "<group>"; };
 		D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				D408F6831D60086F0081E558 /* LoginController.swift */,
 				D4E06F041D612844008F7550 /* LoginController+Handlers.swift */,
 				D408F6731D60069A0081E558 /* MessagesController.swift */,
+				D42586B91D6FFF4800BD655F /* ChatLogController.swift */,
 				D4E06EFF1D604A8E008F7550 /* NewMessageController.swift */,
 			);
 			name = Controller;
@@ -252,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D42586BA1D6FFF4800BD655F /* ChatLogController.swift in Sources */,
 				D408F6841D60086F0081E558 /* LoginController.swift in Sources */,
 				D4E06F051D612844008F7550 /* LoginController+Handlers.swift in Sources */,
 				D4E06F001D604A8E008F7550 /* NewMessageController.swift in Sources */,

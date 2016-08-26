@@ -82,8 +82,13 @@ class MessagesController: UITableViewController {
         titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTitleViewTap)))
     }
 
+    let chatLogController: ChatLogController = {
+        let chatlogC = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        return chatlogC
+    }()
+
     func handleTitleViewTap() {
-        
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
 
     func handleLogout() {
