@@ -85,8 +85,6 @@
 				D4E06F061D61798C008F7550 /* Helpers */,
 				D4E06F031D612333008F7550 /* Model */,
 				D408F6851D6008780081E558 /* Controller */,
-				D408F6711D60069A0081E558 /* AppDelegate.swift */,
-				D4E06EFD1D603206008F7550 /* GlobalMethods.swift */,
 				D408F6781D60069A0081E558 /* Assets.xcassets */,
 				D408F67A1D60069A0081E558 /* LaunchScreen.storyboard */,
 				D408F67D1D60069A0081E558 /* Info.plist */,
@@ -110,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				D4E06F011D6122AC008F7550 /* User.swift */,
+				D4E06EFD1D603206008F7550 /* GlobalMethods.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -118,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				D4E06F071D617999008F7550 /* Extensions.swift */,
+				D408F6711D60069A0081E558 /* AppDelegate.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";

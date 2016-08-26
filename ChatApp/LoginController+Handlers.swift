@@ -82,7 +82,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 print("save login erro = \(err)")
                 return
             }
-            self.messagesController?.navigationItem.title = values["name"] as? String
+            self.messagesController?.fetchUserAndSetupNavBarTitle()
             self.dismissViewControllerAnimated(true, completion: nil)
         })
     }
