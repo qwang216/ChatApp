@@ -34,9 +34,56 @@ class MessagesController: UITableViewController {
         guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
             FIRDatabase.database().reference().child("users").child(uid).observeSingleEventOfType(.Value, withBlock: { snapshot in
                 if let dict = snapshot.value as? [String: AnyObject] {
-                    self.navigationItem.title = dict["name"] as? String
+                    let user = User()
+                    user.setValuesForKeysWithDictionary(dict)
+                    self.setupNavBarWithUser(user)
                 }
             })
+    }
+
+    func setupNavBarWithUser(user: User) {
+        navigationItem.title = user.name
+        let titleView = UIView()
+        titleView.frame = CGRectMake(0, 0, 100, 40)
+
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        titleView.addSubview(containerView)
+
+        let profileImageView = UIImageView()
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.contentMode = .ScaleAspectFill
+        profileImageView.layer.cornerRadius = 20
+        profileImageView.layer.masksToBounds = true
+        if let profileImageUrl = user.profileImageUrl {
+            profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
+        }
+        titleView.addSubview(profileImageView)
+        // x, y, height, width constrain
+        profileImageView.leftAnchor.constraintEqualToAnchor(containerView.leftAnchor).active = true
+        profileImageView.centerYAnchor.constraintEqualToAnchor(containerView.centerYAnchor).active = true
+        profileImageView.heightAnchor.constraintEqualToConstant(40).active = true
+        profileImageView.widthAnchor.constraintEqualToConstant(40).active = true
+
+        let nameLabel = UILabel()
+        nameLabel.text = user.name
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(nameLabel)
+        // x, y, height, width constrain
+        nameLabel.centerYAnchor.constraintEqualToAnchor(containerView.centerYAnchor).active = true
+        nameLabel.rightAnchor.constraintEqualToAnchor(containerView.rightAnchor).active = true
+        nameLabel.leftAnchor.constraintEqualToAnchor(profileImageView.rightAnchor, constant: 8).active = true
+        nameLabel.heightAnchor.constraintEqualToAnchor(profileImageView.heightAnchor).active = true
+
+        containerView.centerXAnchor.constraintEqualToAnchor(titleView.centerXAnchor).active = true
+        containerView.centerYAnchor.constraintEqualToAnchor(titleView.centerYAnchor).active = true
+
+        navigationItem.titleView = titleView
+        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTitleViewTap)))
+    }
+
+    func handleTitleViewTap() {
+        
     }
 
     func handleLogout() {
